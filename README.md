@@ -1,2 +1,2 @@
-# notifier
-Send push notifications to phone
+# Notifier project
+Send push notifications to phone via IFTTT webhook.
