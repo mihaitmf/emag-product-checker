@@ -1,10 +1,13 @@
 <?php
 
-namespace Notifier\EmagProductChecker;
+namespace Notifier\EmagProductChecker\Command;
 
+use Notifier\EmagProductChecker\EmagProductChecker;
+use Notifier\EmagProductChecker\EmagProductCheckerException;
+use Notifier\EmagProductChecker\EmagProductCheckerResult;
 use Notifier\PushNotification\PushNotificationService;
 
-class EmagProductCheckerRunner
+class EmagProductCheckerCommand
 {
     private const MESSAGE_PRODUCT_AVAILABLE = 'Emag product available: %s! Price: %s. Stock: %s. Seller: %s.';
     private const MESSAGE_PRODUCT_UNAVAILABLE = 'Emag product not available yet: %s! Price: %s. Stock: %s. Seller: %s.';
@@ -24,7 +27,7 @@ class EmagProductCheckerRunner
     {
         if (count($argv) < 4) {
             $this->printMessage(
-                "\nInsufficient arguments for the script. Example command: php <script-name>.php \"<productShortName>\" \"<productMaxPrice>\" \"<productUrl>\"\n"
+                'Insufficient arguments for the script. Example command: php <script-name>.php "<productShortName>" "<productMaxPrice>" "<productUrl>"'
             );
             return;
         }
