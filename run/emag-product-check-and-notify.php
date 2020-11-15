@@ -7,14 +7,14 @@ use Notifier\PushNotification\PushNotificationService;
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
-//if ($argc < 4) {
-//    print("\nInsufficient arguments for the script. Example command: php <script-name>.php \"<productShortName>\" \"<productMaxPrice>\" \"<productUrl>\"\n");
-//    exit;
-//}
-//
-//$productShortName = $argv[1];
-//$productMaxPrice = $argv[2];
-//$productUrl = $argv[3];
+if ($argc < 4) {
+    print("\nInsufficient arguments for the script. Example command: php <script-name>.php \"<productShortName>\" \"<productMaxPrice>\" \"<productUrl>\"\n");
+    exit;
+}
+
+$productShortName = $argv[1];
+$productMaxPrice = $argv[2];
+$productUrl = $argv[3];
 
 $productShortName = 'Roborock S5 Max';
 $productMaxPrice = '1800';
@@ -27,27 +27,27 @@ try {
     $isProductAvailable = $emagProductChecker->checkProduct($productUrl, (int)$productMaxPrice);
 
     if ($isProductAvailable) {
-        $successMessage = sprintf('Emag product available: %s', $productShortName);
-        print($successMessage);
+        $successMessage = sprintf("Emag product available: %s", $productShortName);
+        print("\n$successMessage");
 
         $notificationResponse = $pushNotificationService->notify($successMessage, $productUrl);
         if ($notificationResponse->isSuccessful()) {
             print("\nPush notification sent!");
         } else {
-            print(sprintf('ERROR sending push notification! %s', $notificationResponse->getError()));
+            print(sprintf("\nERROR sending push notification! %s", $notificationResponse->getError()));
         }
     } else {
-        print('Emag product not available yet!');
+        print("\nEmag product not available yet!");
     }
 
 } catch (EmagProductCheckerException $exception) {
     $errorMessage = sprintf('ERROR checking product %s! %s', $productShortName, $exception->getMessage());
-    print($errorMessage);
+    print("\n$errorMessage");
 
     $notificationResponse = $pushNotificationService->notify($errorMessage);
     if ($notificationResponse->isSuccessful()) {
         print("\nPush notification sent!");
     } else {
-        print(sprintf('ERROR sending push notification! %s', $notificationResponse->getError()));
+        print(sprintf("\nERROR sending push notification! %s", $notificationResponse->getError()));
     }
 }
