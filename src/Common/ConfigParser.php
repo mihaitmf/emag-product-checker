@@ -6,7 +6,7 @@ use RuntimeException;
 
 class ConfigParser
 {
-    const CONFIG_FILE_PATH = '../config.ini';
+    const CONFIG_FILE_NAME = 'config.ini';
 
     /** @var array */
     private $configArray;
@@ -14,9 +14,10 @@ class ConfigParser
     public function __construct(array $configArray = [])
     {
         if ($configArray === []) {
-            $parsedConfig = parse_ini_file(self::CONFIG_FILE_PATH, true);
+            $configFilePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . self::CONFIG_FILE_NAME;
+            $parsedConfig = parse_ini_file($configFilePath, true);
             if ($parsedConfig === false) {
-                throw new \RuntimeException(sprintf('Could not read config ini file from path: %s', self::CONFIG_FILE_PATH));
+                throw new \RuntimeException(sprintf('Could not read config ini file from path: %s', $configFilePath));
             }
             $this->configArray = $parsedConfig;
         } else {

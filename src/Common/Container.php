@@ -7,6 +7,8 @@ use DI\ContainerBuilder;
 
 class Container
 {
+    const DI_CONFIG_PHP = 'di-config.php';
+
     /** @var \DI\Container */
     private static $container;
 
@@ -59,7 +61,7 @@ class Container
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->useAnnotations(true);
         $containerBuilder->setDefinitionCache(new ArrayCache());
-        $containerBuilder->addDefinitions('../di-config.php');
+        $containerBuilder->addDefinitions(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . self::DI_CONFIG_PHP);
 
         return $containerBuilder->build();
     }
