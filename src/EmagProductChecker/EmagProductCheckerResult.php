@@ -4,34 +4,21 @@ namespace Notifier\EmagProductChecker;
 
 class EmagProductCheckerResult
 {
-    /** @var bool */
-    private $isAvailable;
+    private bool $isAvailable;
+    private EmagProductData $productData;
 
-    /** @var EmagProductData */
-    private $productData;
-
-    /**
-     * @param bool $isAvailable
-     * @param EmagProductData $productData
-     */
-    public function __construct($isAvailable, EmagProductData $productData)
+    public function __construct(bool $isAvailable, EmagProductData $productData)
     {
         $this->isAvailable = $isAvailable;
         $this->productData = $productData;
     }
 
-    /**
-     * @return bool
-     */
-    public function isAvailable()
+    public function isAvailable(): bool
     {
         return $this->isAvailable;
     }
 
-    /**
-     * @return EmagProductData
-     */
-    public function getProductData()
+    public function getProductData(): EmagProductData
     {
         return $this->productData;
     }

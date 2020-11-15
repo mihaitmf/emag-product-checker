@@ -4,53 +4,36 @@ namespace Notifier\PushNotification;
 
 class PushNotificationResponse
 {
-    /** @var bool */
-    private $isSuccessful;
-
-    /** @var string */
-    private $error;
+    private bool $isSuccessful;
+    private string $error;
 
     private function __construct()
     {
     }
 
-    /**
-     * @return PushNotificationResponse
-     */
-    public static function success()
+    public static function success(): PushNotificationResponse
     {
-        $response = new self();
+        $response = new PushNotificationResponse();
         $response->isSuccessful = true;
 
         return $response;
     }
 
-    /**
-     * @param string $errorString
-     *
-     * @return PushNotificationResponse
-     */
-    public static function error($errorString)
+    public static function error(string $errorString): PushNotificationResponse
     {
-        $response = new self();
+        $response = new PushNotificationResponse();
         $response->isSuccessful = false;
         $response->error = $errorString;
 
         return $response;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->isSuccessful;
     }
 
-    /**
-     * @return string
-     */
-    public function getError()
+    public function getError(): string
     {
         return $this->error;
     }

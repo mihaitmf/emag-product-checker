@@ -6,30 +6,26 @@ use Notifier\PushNotification\PushNotificationService;
 
 class EmagProductCheckerRunner
 {
-    const MESSAGE_PRODUCT_AVAILABLE = 'Emag product available: %s! Price: %s. Stock: %s. Seller: %s.';
-    const MESSAGE_PRODUCT_UNAVAILABLE = 'Emag product not available yet: %s! Price: %s. Stock: %s. Seller: %s.';
+    private const MESSAGE_PRODUCT_AVAILABLE = 'Emag product available: %s! Price: %s. Stock: %s. Seller: %s.';
+    private const MESSAGE_PRODUCT_UNAVAILABLE = 'Emag product not available yet: %s! Price: %s. Stock: %s. Seller: %s.';
 
-    /** @var EmagProductChecker */
-    private $productChecker;
+    private EmagProductChecker $productChecker;
+    private PushNotificationService $pushNotificationService;
 
-    /** @var PushNotificationService */
-    private $pushNotificationService;
-
-    public function __construct(EmagProductChecker $productChecker, PushNotificationService $pushNotificationService)
-    {
+    public function __construct(
+        EmagProductChecker $productChecker,
+        PushNotificationService $pushNotificationService
+    ) {
         $this->productChecker = $productChecker;
         $this->pushNotificationService = $pushNotificationService;
     }
 
-    /**
-     * @param array $argv
-     *
-     * @return void
-     */
-    public function run(array $argv)
+    public function run(array $argv): void
     {
         if (count($argv) < 4) {
-            $this->printMessage("\nInsufficient arguments for the script. Example command: php <script-name>.php \"<productShortName>\" \"<productMaxPrice>\" \"<productUrl>\"\n");
+            $this->printMessage(
+                "\nInsufficient arguments for the script. Example command: php <script-name>.php \"<productShortName>\" \"<productMaxPrice>\" \"<productUrl>\"\n"
+            );
             return;
         }
 
@@ -60,20 +56,16 @@ class EmagProductCheckerRunner
         }
 
         // do not send notification when product is unavailable and no error occurred
-        $this->printMessage($this->getProductMessage(
-            self::MESSAGE_PRODUCT_UNAVAILABLE,
-            $productShortName,
-            $productCheckerResult
-        ));
+        $this->printMessage(
+            $this->getProductMessage(
+                self::MESSAGE_PRODUCT_UNAVAILABLE,
+                $productShortName,
+                $productCheckerResult
+            )
+        );
     }
 
-    /**
-     * @param string $message
-     * @param string $productUrl
-     *
-     * @return void
-     */
-    private function sendNotificationAndPrint($message, $productUrl)
+    private function sendNotificationAndPrint(string $message, string $productUrl): void
     {
         $notificationResponse = $this->pushNotificationService->notify($message, $productUrl);
         if ($notificationResponse->isSuccessful()) {
@@ -83,25 +75,16 @@ class EmagProductCheckerRunner
         }
     }
 
-    /**
-     * @param string $message
-     *
-     * @return void
-     */
-    private function printMessage($message)
+    private function printMessage(string $message): void
     {
         print("\n$message");
     }
 
-    /**
-     * @param string $format
-     * @param string $productShortName
-     * @param EmagProductCheckerResult $productCheckerResult
-     *
-     * @return string
-     */
-    private function getProductMessage($format, $productShortName, EmagProductCheckerResult $productCheckerResult)
-    {
+    private function getProductMessage(
+        string $format,
+        string $productShortName,
+        EmagProductCheckerResult $productCheckerResult
+    ): string {
         return sprintf(
             $format,
             $productShortName,

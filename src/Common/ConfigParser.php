@@ -6,18 +6,17 @@ use RuntimeException;
 
 class ConfigParser
 {
-    const CONFIG_FILE_NAME = 'config.ini';
+    private const CONFIG_FILE_NAME = 'config.ini';
 
-    /** @var array */
-    private $configArray;
+    private array $configArray;
 
     public function __construct(array $configArray = [])
     {
         if ($configArray === []) {
-            $configFilePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . self::CONFIG_FILE_NAME;
+            $configFilePath = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . self::CONFIG_FILE_NAME;
             $parsedConfig = parse_ini_file($configFilePath, true);
             if ($parsedConfig === false) {
-                throw new \RuntimeException(sprintf('Could not read config ini file from path: %s', $configFilePath));
+                throw new RuntimeException(sprintf('Could not read config ini file from path: %s', $configFilePath));
             }
             $this->configArray = $parsedConfig;
         } else {
@@ -30,7 +29,7 @@ class ConfigParser
      *
      * @return ConfigParser|string
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $value = $this->configArray[$name];
         if (is_array($value)) {
@@ -40,23 +39,12 @@ class ConfigParser
         return (string)$value;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return isset($this->configArray[$name]);
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     *
-     * @return void
-     */
-    public function __set($name, $value)
+    public function __set(string $name, string $value): void
     {
         throw new RuntimeException('Not allowed to set a config ini value dynamically');
     }

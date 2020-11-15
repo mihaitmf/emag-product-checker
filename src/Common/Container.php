@@ -2,15 +2,16 @@
 
 namespace Notifier\Common;
 
-use DI\Cache\ArrayCache;
+use DI\Container as DIContainer;
 use DI\ContainerBuilder;
+use DI\DependencyException;
+use DI\NotFoundException;
 
 class Container
 {
-    const DI_CONFIG_PHP = 'di-config.php';
+    private const DI_CONFIG_PHP = 'di-config.php';
 
-    /** @var \DI\Container */
-    private static $container;
+    private static ?DIContainer $container = null;
 
     private function __construct()
     {
@@ -19,11 +20,11 @@ class Container
     /**
      * @param string $name
      *
-     * @return mixed
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @return object
+     * @throws DependencyException
+     * @throws NotFoundException
      */
-    public static function get($name)
+    public static function get(string $name): object
     {
         return self::getContainer()->get($name);
     }
@@ -32,19 +33,16 @@ class Container
      * @param string $name
      * @param array $parameters Map<string, string> = <parameterName => className>
      *
-     * @return mixed
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
+     * @return object
+     * @throws DependencyException
+     * @throws NotFoundException
      */
-    public static function make($name, array $parameters = [])
+    public static function make(string $name, array $parameters = []): object
     {
         return self::getContainer()->make($name, $parameters);
     }
 
-    /**
-     * @return \DI\Container
-     */
-    private static function getContainer()
+    private static function getContainer(): DIContainer
     {
         if (self::$container === null) {
             self::$container = self::buildContainer();
@@ -53,15 +51,11 @@ class Container
         return self::$container;
     }
 
-    /**
-     * @return \DI\Container
-     */
-    private static function buildContainer()
+    private static function buildContainer(): DIContainer
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->useAnnotations(true);
-        $containerBuilder->setDefinitionCache(new ArrayCache());
-        $containerBuilder->addDefinitions(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . self::DI_CONFIG_PHP);
+        $containerBuilder->addDefinitions(dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . self::DI_CONFIG_PHP);
 
         return $containerBuilder->build();
     }

@@ -5,16 +5,14 @@ namespace Notifier\PushNotification;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
+use JsonException;
 use Notifier\Common\ConfigParser;
 use RuntimeException;
 
 class PushNotificationService
 {
-    /** @var ClientInterface */
-    private $httpClient;
-
-    /** @var ConfigParser */
-    private $config;
+    private ClientInterface $httpClient;
+    private ConfigParser $config;
 
     public function __construct(ClientInterface $httpClient, ConfigParser $config)
     {
@@ -22,13 +20,7 @@ class PushNotificationService
         $this->config = $config;
     }
 
-    /**
-     * @param string $message
-     * @param string $linkUrl
-     *
-     * @return PushNotificationResponse
-     */
-    public function notify($message, $linkUrl = '')
+    public function notify(string $message, string $linkUrl = ''): PushNotificationResponse
     {
         $request = $this->buildRequest($message, $linkUrl);
 
@@ -56,13 +48,7 @@ class PushNotificationService
         return PushNotificationResponse::success();
     }
 
-    /**
-     * @param string $message
-     * @param string $linkUrl
-     *
-     * @return Request
-     */
-    private function buildRequest($message, $linkUrl)
+    private function buildRequest(string $message, string $linkUrl): Request
     {
         $headers = [
             'Content-Type' => 'application/json',
@@ -76,15 +62,18 @@ class PushNotificationService
             $requestData['value2'] = $linkUrl;
         }
 
-        $body = json_encode($requestData);
+        try {
+            $body = json_encode($requestData, JSON_THROW_ON_ERROR);
+        } catch (JsonException $exception) {
+            throw new RuntimeException(
+                sprintf('Error encoding the request body to json: %s', $exception->getMessage())
+            );
+        }
 
         return new Request('POST', $this->getWebhookUrl(), $headers, $body);
     }
 
-    /**
-     * @return string
-     */
-    private function getWebhookUrl()
+    private function getWebhookUrl(): string
     {
         $webhookUrl = (string)$this->config->push_notification->webhook_url;
 

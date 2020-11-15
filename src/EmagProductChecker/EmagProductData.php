@@ -4,47 +4,28 @@ namespace Notifier\EmagProductChecker;
 
 class EmagProductData
 {
-    /** @var float */
-    private $price;
+    private float $price;
+    private string $stockLevel;
+    private string $seller;
 
-    /** @var string */
-    private $stockLevel;
-
-    /** @var string */
-    private $seller;
-
-    /**
-     * @param float $price
-     * @param string $stockLevel
-     * @param string $seller
-     */
-    public function __construct($price, $stockLevel, $seller)
+    public function __construct(float $price, string $stockLevel, string $seller)
     {
         $this->price = $price;
         $this->stockLevel = $stockLevel;
         $this->seller = $seller;
     }
 
-    /**
-     * @return float
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @return string
-     */
-    public function getStockLevel()
+    public function getStockLevel(): string
     {
         return $this->stockLevel;
     }
 
-    /**
-     * @return string
-     */
-    public function getSeller()
+    public function getSeller(): string
     {
         return $this->seller;
     }
