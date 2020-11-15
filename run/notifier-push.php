@@ -8,7 +8,7 @@ $startTime = microtime(true);
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "bootstrap.php";
 
 if ($argc < 2) {
-    print("\nInsufficient arguments for the script. Example command: php <script-name>.php <message> <link (optional)>\n");
+    print("\nInsufficient arguments for the script. Example command: php <script-name>.php \"<message>\" \"<link (optional)>\"\n");
     exit;
 }
 
