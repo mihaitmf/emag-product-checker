@@ -28,7 +28,7 @@ class PushNotificationService
      *
      * @return PushNotificationResponse
      */
-    public function notify($message, $linkUrl)
+    public function notify($message, $linkUrl = '')
     {
         $request = $this->buildRequest($message, $linkUrl);
 
