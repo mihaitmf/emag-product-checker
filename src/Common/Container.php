@@ -59,6 +59,7 @@ class Container
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->useAnnotations(true);
         $containerBuilder->setDefinitionCache(new ArrayCache());
+        $containerBuilder->addDefinitions('../di-config.php');
 
         return $containerBuilder->build();
     }
