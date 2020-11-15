@@ -64,7 +64,10 @@ class PushNotificationService
      */
     private function buildRequest($message, $linkUrl)
     {
-        $headers = ['Content-Type' => 'application/json'];
+        $headers = [
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36',
+        ];
 
         $requestData = [
             'value1' => $message,

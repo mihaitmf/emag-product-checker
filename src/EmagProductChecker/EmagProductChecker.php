@@ -62,7 +62,15 @@ class EmagProductChecker
     public function checkProduct($productUrl, $productMaxPrice)
     {
         try {
-            $response = $this->httpClient->request('GET', $productUrl);
+            $response = $this->httpClient->request(
+                'GET',
+                $productUrl,
+                [
+                    'headers' => [
+                        'User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36',
+                    ],
+                ]
+            );
         } catch (GuzzleException $exception) {
             throw new EmagProductCheckerException(
                 sprintf('Could not make get request to product url: %s', $exception->getMessage())
