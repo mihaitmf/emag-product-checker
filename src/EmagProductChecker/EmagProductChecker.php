@@ -63,6 +63,8 @@ class EmagProductChecker
      */
     private function parseProductPage($productPageHtml)
     {
+//        file_put_contents('test.html',$productPageHtml);
+
         $domDocument = new DomDocument();
         @$domDocument->loadHTML($productPageHtml); // use @ to suppress warnings
         $xPathFinder = new DomXPath($domDocument);

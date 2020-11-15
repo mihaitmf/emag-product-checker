@@ -16,10 +16,6 @@ $productShortName = $argv[1];
 $productMaxPrice = $argv[2];
 $productUrl = $argv[3];
 
-$productShortName = 'Roborock S5 Max';
-$productMaxPrice = '1800';
-$productUrl = 'https://www.emag.ro/robot-de-aspirare-roborock-cleaner-s5-max-wifi-aspirator-si-mop-smart-top-up-navigare-lidar-setare-bariere-virtuale-zone-no-mop-alb-s5e02-00-white/pd/D888WWBBM/';
-
 $emagProductChecker = Container::get(EmagProductChecker::class);
 $pushNotificationService = Container::get(PushNotificationService::class);
 
