@@ -1,8 +1,8 @@
 <?php
 
-namespace Notifier\Common;
+namespace Notifier\Common\ExecutionStats;
 
-class RunScriptStatistics
+class ScriptRunStatistics
 {
     /**
      * @param float $startTime

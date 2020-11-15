@@ -1,11 +1,11 @@
 <?php
 
-use Notifier\Common\RunScriptStatistics;
+use Notifier\Common\ExecutionStats\ScriptRunStatistics;
 
 $startTime = microtime(true);
 
 $classLoader = require_once __DIR__ . '/vendor/autoload.php';
 
 register_shutdown_function(function () use ($startTime) {
-    RunScriptStatistics::printStats($startTime);
+    ScriptRunStatistics::printStats($startTime);
 });
