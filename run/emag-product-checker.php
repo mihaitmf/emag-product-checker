@@ -1,7 +1,7 @@
 <?php
 
-use Notifier\Common\Container;
-use Notifier\EmagProductChecker\Command\EmagProductCheckerCommand;
+use ProductChecker\Common\Container;
+use ProductChecker\EmagProductChecker\Command\EmagProductCheckerCommand;
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'bootstrap.php';
 

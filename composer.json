@@ -1,8 +1,8 @@
 {
-  "name": "mihaitmf/notifier",
-  "description": "Send push notifications to phone via IFTTT webhook",
-  "keywords": ["notifier", "IFTTT", "mihaitmf"],
-  "homepage": "https://github.com/mihaitmf/notifier",
+  "name": "mihaitmf/emag-product-checker",
+  "description": "Check if Emag product is in stock and below a price, and send push notification",
+  "keywords": ["emag-product-checker", "checker", "notifier", "mihaitmf"],
+  "homepage": "https://github.com/mihaitmf/emag-product-checker",
   "license": "GPL-3.0-or-later",
   "authors": [
     {
@@ -15,25 +15,31 @@
   "config": {
     "vendor-dir": "vendor"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/mihaitmf/notifier.git"
+    }
+  ],
   "require": {
     "php" : "^7.4",
     "ext-dom": "*",
-    "ext-json": "*",
     "php-di/php-di": "^6",
     "doctrine/annotations": "^1",
-    "guzzlehttp/guzzle": "^7"
+    "guzzlehttp/guzzle": "^7",
+    "mihaitmf/notifier": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^9"
   },
   "autoload": {
     "psr-4": {
-      "Notifier\\": ["src/"]
+      "ProductChecker\\": ["src/"]
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Notifier\\Tests\\": "test/"
+      "ProductChecker\\Tests\\": "test/"
     }
   }
 }

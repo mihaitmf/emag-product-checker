@@ -1,6 +1,6 @@
 <?php
 
-namespace Notifier\EmagProductChecker;
+namespace ProductChecker\EmagProductChecker;
 
 use DOMDocument;
 use DOMXPath;

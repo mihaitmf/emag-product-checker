@@ -1,6 +1,6 @@
 <?php
 
-namespace Notifier\Common\ExecutionStats;
+namespace ProductChecker\Common\ExecutionStats;
 
 class ScriptRunStatistics
 {

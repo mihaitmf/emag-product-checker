@@ -1,6 +1,6 @@
 <?php
 
-use Notifier\Common\ExecutionStats\ScriptRunStatistics;
+use ProductChecker\Common\ExecutionStats\ScriptRunStatistics;
 
 $startTime = microtime(true);
 

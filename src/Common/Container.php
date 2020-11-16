@@ -1,6 +1,6 @@
 <?php
 
-namespace Notifier\Common;
+namespace ProductChecker\Common;
 
 use DI\Container as DIContainer;
 use DI\ContainerBuilder;

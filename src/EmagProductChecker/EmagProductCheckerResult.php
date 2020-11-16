@@ -1,6 +1,6 @@
 <?php
 
-namespace Notifier\EmagProductChecker;
+namespace ProductChecker\EmagProductChecker;
 
 class EmagProductCheckerResult
 {

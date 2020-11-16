@@ -1,10 +1,10 @@
 <?php
 
-namespace Notifier\EmagProductChecker\Command;
+namespace ProductChecker\EmagProductChecker\Command;
 
-use Notifier\EmagProductChecker\EmagProductChecker;
-use Notifier\EmagProductChecker\EmagProductCheckerException;
-use Notifier\EmagProductChecker\EmagProductCheckerResult;
+use ProductChecker\EmagProductChecker\EmagProductChecker;
+use ProductChecker\EmagProductChecker\EmagProductCheckerException;
+use ProductChecker\EmagProductChecker\EmagProductCheckerResult;
 use Notifier\PushNotification\PushNotificationService;
 
 class EmagProductCheckerCommand
