@@ -367,12 +367,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mihaitmf/notifier.git",
-                "reference": "3beb32d6d0af236e224545bb3538dcc8640fbb2b"
+                "reference": "c3e0596bb5c655efdde8f39a215356b8a245f300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mihaitmf/notifier/zipball/3beb32d6d0af236e224545bb3538dcc8640fbb2b",
-                "reference": "3beb32d6d0af236e224545bb3538dcc8640fbb2b",
+                "url": "https://api.github.com/repos/mihaitmf/notifier/zipball/c3e0596bb5c655efdde8f39a215356b8a245f300",
+                "reference": "c3e0596bb5c655efdde8f39a215356b8a245f300",
                 "shasum": ""
             },
             "require": {
@@ -380,7 +380,9 @@
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^7",
                 "php": "^7.4",
-                "php-di/php-di": "^6"
+                "php-di/php-di": "^6",
+                "symfony/console": "^5",
+                "symfony/event-dispatcher": "^5"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9"
@@ -424,7 +426,7 @@
                 "source": "https://github.com/mihaitmf/notifier/tree/master",
                 "issues": "https://github.com/mihaitmf/notifier/issues"
             },
-            "time": "2020-11-16T00:29:53+00:00"
+            "time": "2020-11-18T23:40:47+00:00"
         },
         {
             "name": "opis/closure",
