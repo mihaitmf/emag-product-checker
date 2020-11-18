@@ -2,10 +2,10 @@
 
 namespace ProductChecker\EmagProductChecker\Command;
 
+use Notifier\PushNotification\PushNotificationService;
 use ProductChecker\EmagProductChecker\EmagProductChecker;
 use ProductChecker\EmagProductChecker\EmagProductCheckerException;
 use ProductChecker\EmagProductChecker\EmagProductCheckerResult;
-use Notifier\PushNotification\PushNotificationService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
