@@ -13,9 +13,16 @@ In summary, this project does:
 
 Example command:
 * `php <script-name>.php "<productShortName>" "<productMaxPrice>" "<productUrl>"`
-* `php run\emag-product-checker.php "Roborock S5 Max" 1800 "https://www.emag.ro/robot-de-aspirare-roborock-cleaner-s5-max-wifi-aspirator-si-mop-smart-top-up-navigare-lidar-setare-bariere-virtuale-zone
-   -no-mop-alb-s5e02-00-white/pd/D888WWBBM/"
-`
+* Linux: `php bin/run.php check:single "Roborock S5 Max" 1800 "https://www.emag.ro/robot-de-aspirare-roborock-cleaner-s5-max-wifi-aspirator-si-mop-smart-top-up-navigare-lidar-setare-bariere-virtuale-zone-no-mop-alb-s5e02-00-white/pd/D888WWBBM/"`
+* Windows: `php bin\run.php check:single "Roborock S5 Max" 1800 "https://www.emag.ro/robot-de-aspirare-roborock-cleaner-s5-max-wifi-aspirator-si-mop-smart-top-up-navigare-lidar-setare-bariere-virtuale-zone-no-mop-alb-s5e02-00-white/pd/D888WWBBM/"`
+
+### How to set up cron job on Linux
+* List crons: crontab -l
+* Edit crontab file: crontab -e
+* Add new entry at the end of the file:
+  * 30,59 9-23 * * * /home/mihai/projects/emag-product-checker/bin/run.php
+  * This is an example to run: "At minute 30 and 59 past every hour from 9 through 23."
+* Crontab syntax: https://crontab.guru/#30,59_9-23_*_*_*
 
 ### How to Create Task Scheduler in Windows
 * Win+q -> Task Scheduler -> Create Task

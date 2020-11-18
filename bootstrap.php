@@ -1,13 +1,13 @@
 <?php
 
-use ProductChecker\Common\ExecutionStats\ScriptRunStatistics;
+//use ProductChecker\Common\Console\ExecutionStatistics;
 
-$startTime = microtime(true);
+//$startTime = microtime(true);
 
-$classLoader = require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-register_shutdown_function(
-    static function () use ($startTime) {
-        ScriptRunStatistics::printStats($startTime);
-    }
-);
+//register_shutdown_function(
+//    static function () use ($startTime) {
+//        ExecutionStatistics::printStats($startTime);
+//    }
+//);
