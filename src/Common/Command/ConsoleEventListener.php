@@ -1,6 +1,6 @@
 <?php
 
-namespace ProductChecker\Common\Console;
+namespace ProductChecker\Common\Command;
 
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;

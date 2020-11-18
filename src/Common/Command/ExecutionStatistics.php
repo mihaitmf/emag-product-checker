@@ -1,6 +1,6 @@
 <?php
 
-namespace ProductChecker\Common\Console;
+namespace ProductChecker\Common\Command;
 
 class ExecutionStatistics
 {
@@ -30,7 +30,8 @@ class ExecutionStatistics
         $this->memoryMegabytesUsed = self::getMemoryMegabytesUsed();
     }
 
-    public function getPrintMessage(): string {
+    public function getPrintMessage(): string
+    {
         return sprintf(
             self::PRINT_FORMAT,
             $this->executionTimeSeconds,

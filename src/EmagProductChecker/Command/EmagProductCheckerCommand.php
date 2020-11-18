@@ -35,13 +35,14 @@ class EmagProductCheckerCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('check:single')
+        $commandName = 'check:single';
+        $this->setName($commandName)
             ->setDescription(
                 'Check a single Emag product according to some constraints and send push notification if it is available'
             )
             ->setHelp(
                 "Check a single Emag product according to some constraints and send push notification if it is available\r\n"
-                . 'Example command: php <script-name>.php "<productShortName>" "<productMaxPrice>" "<productUrl>"'
+                . "Example command: php <script-name>.php $commandName " . '"<productShortName>" "<productMaxPrice>" "<productUrl>"'
             )
             ->setDefinition(
                 new InputDefinition(
@@ -49,7 +50,7 @@ class EmagProductCheckerCommand extends Command
                         new InputArgument(
                             self::INPUT_PRODUCT_SHORT_NAME,
                             InputArgument::REQUIRED,
-                            'A short name to identify the product that will appear in the notification message. If it contains spaces, make sure to enclose it in double quotes "<productShortName>"',
+                            'A short name to identify the product that will appear in the notification message. If it contains spaces, make sure to enclose it in double quotes: "<productShortName>"',
                         ),
                         new InputArgument(
                             self::INPUT_PRODUCT_MAX_PRICE,

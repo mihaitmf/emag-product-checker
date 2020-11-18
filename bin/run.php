@@ -1,6 +1,6 @@
 <?php
 
-use ProductChecker\Common\Console\ConsoleEventListener;
+use ProductChecker\Common\Command\ConsoleEventListener;
 use ProductChecker\Common\Container;
 use ProductChecker\EmagProductChecker\Command\EmagProductCheckerCommand;
 use Symfony\Component\Console\Application;
