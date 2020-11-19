@@ -1,4 +1,10 @@
 # Emag Product Checker project
+[![Build Status](https://travis-ci.com/mihaitmf/emag-product-checker.svg?branch=main)](https://travis-ci.com/mihaitmf/emag-product-checker)
+
+## Requirements
+- [![Minimum PHP Version](https://img.shields.io/travis/php-v/mihaitmf/emag-product-checker/main)](https://php.net/)
+- composer
+
 ### Check if Emag product is available according to some constraints and send push notification
 Check if a product is in stock, has a price below a given maximum and is sold by Emag.
 Send a push notification on mobile if these conditions are fulfilled. 
