@@ -59,7 +59,7 @@ In summary, this application does the following operations:
 * List crons: crontab -l
 * Edit crontab file: crontab -e
 * Add new entry at the end of the file:
-  * 30,59 9-23 * * * /home/mihai/projects/emag-product-checker/bin/run.php check-list
+  * 30,59 9-23 * * * php /home/mihai/projects/emag-product-checker/bin/run.php check-list >> /home/mihai/projects/emag-product-checker/bin/log
   * This is an example to run: "At minute 30 and 59 past every hour from 9 through 23."
 * Crontab syntax: https://crontab.guru/#30,59_9-23_*_*_*
 
