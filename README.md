@@ -6,8 +6,8 @@
 - composer
 
 ### Check if Emag product is available according to some constraints and send push notification
-Check if a product is in stock, has a price below a given maximum and is sold by Emag.
-Send a push notification on mobile if these conditions are fulfilled. 
+The purpose of this project is to check if a product is in stock, has a price below a given maximum and is sold by Emag.
+And send a push notification on mobile if these conditions are fulfilled. 
 
 You must have an IFTTT (https://ifttt.com/) account and an applet with a webhook created.
 
