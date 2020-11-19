@@ -10,6 +10,12 @@ use Psr\Http\Message\ResponseInterface;
 
 class EmagProductChecker
 {
+    public const REQUEST_OPTIONS_HEADERS = [
+        'headers' => [
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36',
+        ],
+    ];
+
     private const CLASSNAME_PRICE_STOCK_PARENT = 'product-highlight product-page-pricing';
     private const CLASSNAME_PRICE = 'product-new-price';
     private const CLASSNAME_STOCK = 'label';
@@ -81,15 +87,7 @@ class EmagProductChecker
     private function makeGetRequest(string $productUrl): ResponseInterface
     {
         try {
-            return $this->httpClient->request(
-                'GET',
-                $productUrl,
-                [
-                    'headers' => [
-                        'User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36',
-                    ],
-                ]
-            );
+            return $this->httpClient->request('GET', $productUrl,self::REQUEST_OPTIONS_HEADERS);
         } catch (GuzzleException $exception) {
             throw new EmagProductCheckerException(
                 sprintf('Could not make GET request to product url: %s', $exception->getMessage())
@@ -105,7 +103,7 @@ class EmagProductChecker
      */
     private function parseProductPage(string $productPageHtml): EmagProductData
     {
-//        file_put_contents('test.html', $productPageHtml);
+//        file_put_contents('test.html', $productPageHtml); exit;
 //        $productPageHtml = file_get_contents('prod.html');
 
         $domDocument = new DomDocument();
