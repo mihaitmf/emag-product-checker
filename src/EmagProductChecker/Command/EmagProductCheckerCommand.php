@@ -14,9 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class EmagProductCheckerCommand extends Command
 {
-    private const INPUT_PRODUCT_SHORT_NAME = 'productShortName';
-    private const INPUT_PRODUCT_MAX_PRICE = 'productMaxPrice';
-    private const INPUT_PRODUCT_URL = 'productURL';
+    public const INPUT_PRODUCT_SHORT_NAME = 'productShortName';
+    public const INPUT_PRODUCT_MAX_PRICE = 'productMaxPrice';
+    public const INPUT_PRODUCT_URL = 'productURL';
 
     private const MESSAGE_PRODUCT_AVAILABLE = 'Emag product available: %s! Price: %s. Stock: %s. Seller: %s.';
     private const MESSAGE_PRODUCT_UNAVAILABLE = 'Emag product not available yet: %s! Price: %s. Stock: %s. Seller: %s.';
@@ -35,39 +35,42 @@ class EmagProductCheckerCommand extends Command
 
     protected function configure(): void
     {
-        $commandName = 'check:single';
+        $commandName = 'check';
         $this->setName($commandName)
             ->setDescription(
-                'Check a single Emag product according to some constraints and send push notification if it is available'
+                'Check an Emag product according to some constraints and send push notification if it is available'
             )
             ->setHelp(
-                "Check a single Emag product according to some constraints and send push notification if it is available\r\n"
+                "Check an Emag product according to some constraints and send push notification if it is available\r\n"
                 . "Example command: php <script-name>.php $commandName " . '"<productShortName>" "<productMaxPrice>" "<productUrl>"'
             )
-            ->setDefinition(
-                new InputDefinition(
-                    [
-                        new InputArgument(
-                            self::INPUT_PRODUCT_SHORT_NAME,
-                            InputArgument::REQUIRED,
-                            'A short name to identify the product that will appear in the notification message. If it contains spaces, make sure to enclose it in double quotes: "<productShortName>"',
-                        ),
-                        new InputArgument(
-                            self::INPUT_PRODUCT_MAX_PRICE,
-                            InputArgument::REQUIRED,
-                            'Integer value used as constraint for the maximum product price',
-                        ),
-                        new InputArgument(
-                            self::INPUT_PRODUCT_URL,
-                            InputArgument::REQUIRED,
-                            'The URL of the product page from Emag',
-                        ),
-                    ]
-                )
-            );
+            ->setDefinition($this->getInputDefinition());
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function getInputDefinition(): InputDefinition
+    {
+        return new InputDefinition(
+            [
+                new InputArgument(
+                    self::INPUT_PRODUCT_SHORT_NAME,
+                    InputArgument::REQUIRED,
+                    'A short name to identify the product that will appear in the notification message. If it contains spaces, make sure to enclose it in double quotes: "<productShortName>"',
+                ),
+                new InputArgument(
+                    self::INPUT_PRODUCT_MAX_PRICE,
+                    InputArgument::REQUIRED,
+                    'Integer value used as constraint for the maximum product price',
+                ),
+                new InputArgument(
+                    self::INPUT_PRODUCT_URL,
+                    InputArgument::REQUIRED,
+                    'The URL of the product page from Emag',
+                ),
+            ]
+        );
+    }
+
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $productShortName = $input->getArgument(self::INPUT_PRODUCT_SHORT_NAME);
         $productMaxPrice = (int)$input->getArgument(self::INPUT_PRODUCT_MAX_PRICE);

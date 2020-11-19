@@ -6,7 +6,7 @@ namespace PHPSTORM_META {
         \Interop\Container\ContainerInterface::get('') => [
             "" == "@",
         ],
-        \Notifier\Common\Container::get('') => [
+        \ProductChecker\Common\Container::get('') => [
             "" == "@",
         ],
     ];

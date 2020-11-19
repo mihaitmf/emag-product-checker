@@ -367,12 +367,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mihaitmf/notifier.git",
-                "reference": "c3e0596bb5c655efdde8f39a215356b8a245f300"
+                "reference": "c3234612afd045e1e5839886e0c0a4601a248db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mihaitmf/notifier/zipball/c3e0596bb5c655efdde8f39a215356b8a245f300",
-                "reference": "c3e0596bb5c655efdde8f39a215356b8a245f300",
+                "url": "https://api.github.com/repos/mihaitmf/notifier/zipball/c3234612afd045e1e5839886e0c0a4601a248db1",
+                "reference": "c3234612afd045e1e5839886e0c0a4601a248db1",
                 "shasum": ""
             },
             "require": {
@@ -426,7 +426,7 @@
                 "source": "https://github.com/mihaitmf/notifier/tree/master",
                 "issues": "https://github.com/mihaitmf/notifier/issues"
             },
-            "time": "2020-11-18T23:40:47+00:00"
+            "time": "2020-11-19T00:48:34+00:00"
         },
         {
             "name": "opis/closure",
