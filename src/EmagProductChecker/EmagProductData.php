@@ -4,25 +4,25 @@ namespace ProductChecker\EmagProductChecker;
 
 class EmagProductData
 {
-    private float $price;
     private string $stockLevel;
+    private float $price;
     private string $seller;
 
-    public function __construct(float $price, string $stockLevel, string $seller)
+    public function __construct(string $stockLevel, float $price, string $seller)
     {
-        $this->price = $price;
         $this->stockLevel = $stockLevel;
+        $this->price = $price;
         $this->seller = $seller;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price;
     }
 
     public function getStockLevel(): string
     {
         return $this->stockLevel;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
     }
 
     public function getSeller(): string

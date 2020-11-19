@@ -111,50 +111,10 @@ class EmagProductChecker
         $xPathFinder = new DomXPath($domDocument);
 
         return new EmagProductData(
-            $this->parseProductPrice($xPathFinder),
             $this->parseStockLevel($xPathFinder),
+            $this->parseProductPrice($xPathFinder),
             $this->parseSeller($xPathFinder)
         );
-    }
-
-    /**
-     * @param DOMXPath $xPathFinder
-     *
-     * @return float
-     * @throws EmagProductCheckerException
-     */
-    private function parseProductPrice(DOMXPath $xPathFinder): float
-    {
-        $xPathExpression = sprintf(
-            "//div[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]//*[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]",
-            self::CLASSNAME_PRICE_STOCK_PARENT,
-            self::CLASSNAME_PRICE
-        );
-        $nodes = $xPathFinder->query($xPathExpression);
-
-        if ($nodes->length !== 1) {
-            throw new EmagProductCheckerException('Error parsing the product price. Did not find the DOM element.');
-        }
-
-        $priceNodeValue = trim($nodes->item(0)->textContent);
-
-        $parsedPrice = (float)str_replace(
-                '.', // eliminate "dot" character from price string
-                '',
-                substr( // get the price as the string before "Lei"
-                    $priceNodeValue,
-                    0,
-                    strpos($priceNodeValue, 'Lei')
-                )
-            ) / 100; // divide by 100 because the price is in sub-units
-
-        if ($parsedPrice <= 1) {
-            throw new EmagProductCheckerException(
-                sprintf('Error parsing the product price. Did not find the expected format: %s', $priceNodeValue)
-            );
-        }
-
-        return $parsedPrice;
     }
 
     /**
@@ -203,6 +163,46 @@ class EmagProductChecker
         }
 
         return false;
+    }
+
+    /**
+     * @param DOMXPath $xPathFinder
+     *
+     * @return float
+     * @throws EmagProductCheckerException
+     */
+    private function parseProductPrice(DOMXPath $xPathFinder): float
+    {
+        $xPathExpression = sprintf(
+            "//div[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]//*[contains(concat(' ', normalize-space(@class), ' '), ' %s ')]",
+            self::CLASSNAME_PRICE_STOCK_PARENT,
+            self::CLASSNAME_PRICE
+        );
+        $nodes = $xPathFinder->query($xPathExpression);
+
+        if ($nodes->length !== 1) {
+            throw new EmagProductCheckerException('Error parsing the product price. Did not find the DOM element.');
+        }
+
+        $priceNodeValue = trim($nodes->item(0)->textContent);
+
+        $parsedPrice = (float)str_replace(
+                '.', // eliminate "dot" character from price string
+                '',
+                substr( // get the price as the string before "Lei"
+                    $priceNodeValue,
+                    0,
+                    strpos($priceNodeValue, 'Lei')
+                )
+            ) / 100; // divide by 100 because the price is in sub-units
+
+        if ($parsedPrice <= 1) {
+            throw new EmagProductCheckerException(
+                sprintf('Error parsing the product price. Did not find the expected format: %s', $priceNodeValue)
+            );
+        }
+
+        return $parsedPrice;
     }
 
     /**
