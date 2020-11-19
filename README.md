@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/mihaitmf/emag-product-checker.svg?branch=main)](https://travis-ci.com/mihaitmf/emag-product-checker)
 
 ## Requirements
-- [![Minimum PHP Version](https://img.shields.io/travis/php-v/mihaitmf/emag-product-checker/main)](https://php.net/)
+- [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D7.4-blue)](https://php.net/)
 - composer
 
 ### Check if Emag product is available according to some constraints and send push notification
