@@ -1,13 +1,15 @@
 # Emag Product Checker project
+Check if Emag product is available according to some constraints and send push notification
+
 [![Build Status](https://travis-ci.com/mihaitmf/emag-product-checker.svg?branch=main)](https://travis-ci.com/mihaitmf/emag-product-checker)
 
 ## Requirements
 - [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D7.4-blue)](https://php.net/)
 - composer
 
-### Check if Emag product is available according to some constraints and send push notification
+### Check Product availability
 The purpose of this project is to check if a product is in stock, has a price below a given maximum and is sold by Emag.
-And send a push notification on mobile if these conditions are fulfilled. 
+If these conditions are fulfilled, it sends a push notification on mobile. 
 
 You must have an IFTTT (https://ifttt.com/) account and an applet with a webhook created.
 
