@@ -31,12 +31,12 @@ class ConsoleEventListener
     public function onCommandFinish(ConsoleTerminateEvent $event): void
     {
         $this->executionStatistics->end();
+        $this->output->writeln($this->executionStatistics->getPrintMessage());
         $this->output->writeln(sprintf(
             "\n[%s] Command %s finished with exit code %s.",
             date('Y-m-d H:i:s'),
             $event->getCommand()->getName(),
             $event->getExitCode()
         ));
-        $this->output->writeln($this->executionStatistics->getPrintMessage());
     }
 }
