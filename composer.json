@@ -29,7 +29,7 @@
     "guzzlehttp/guzzle": "^7",
     "symfony/console": "^5",
     "symfony/event-dispatcher": "^5",
-    "mihaitmf/notifier": "dev-master"
+    "mihaitmf/notifier": "dev-main"
   },
   "require-dev": {
     "phpunit/phpunit": "^9"
