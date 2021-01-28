@@ -39,11 +39,9 @@ class EmagProductListCheckerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $waitSeconds = random_int(0, 600); // wait a random time between requests to trick Emag and simulate a human behaviour
-        $output->writeln("Wait for $waitSeconds seconds\n");
-        sleep($waitSeconds);
-
         foreach (self::PRODUCTS_LIST as $index => $productParams) {
+            $this->addWait($output);
+
             $productShortName = $productParams[0];
             $output->writeln("Checking product $productShortName...");
 
@@ -56,5 +54,12 @@ class EmagProductListCheckerCommand extends Command
         }
 
         return Command::SUCCESS;
+    }
+
+    protected function addWait(OutputInterface $output): void
+    {
+        $waitSeconds = random_int(0, 600); // wait a random time between requests to trick Emag and simulate a human behaviour
+        $output->writeln("Wait for $waitSeconds seconds\n");
+        sleep($waitSeconds);
     }
 }
