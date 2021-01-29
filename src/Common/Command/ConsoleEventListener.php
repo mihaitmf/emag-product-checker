@@ -22,7 +22,7 @@ class ConsoleEventListener
     {
         $this->executionStatistics->start();
         $this->output->writeln(sprintf(
-            "[%s] Command %s started...\n",
+            "[%s] Command %s started...",
             date('Y-m-d H:i:s'),
             $event->getCommand()->getName()
         ));
@@ -33,7 +33,7 @@ class ConsoleEventListener
         $this->executionStatistics->end();
         $this->output->writeln($this->executionStatistics->getPrintMessage());
         $this->output->writeln(sprintf(
-            "\n[%s] Command %s finished with exit code %s.",
+            "[%s] Command %s finished with exit code %s.\n",
             date('Y-m-d H:i:s'),
             $event->getCommand()->getName(),
             $event->getExitCode()

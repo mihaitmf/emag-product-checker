@@ -18,8 +18,8 @@ class EmagProductCheckerCommand extends Command
     public const INPUT_PRODUCT_MAX_PRICE = 'productMaxPrice';
     public const INPUT_PRODUCT_URL = 'productURL';
 
-    private const MESSAGE_PRODUCT_AVAILABLE = 'Emag product available: %s! Price: %s. Stock: %s. Seller: %s.';
-    private const MESSAGE_PRODUCT_UNAVAILABLE = 'Emag product not available yet: %s! Price: %s. Stock: %s. Seller: %s.';
+    private const MESSAGE_PRODUCT_AVAILABLE = 'Emag product available: %s! Price: %s (max %s). Stock: %s. Seller: %s.';
+    private const MESSAGE_PRODUCT_UNAVAILABLE = 'Emag product not available yet: %s! Price: %s (max %s). Stock: %s. Seller: %s.';
 
     private EmagProductChecker $productChecker;
     private PushNotificationService $pushNotificationService;
@@ -80,9 +80,10 @@ class EmagProductCheckerCommand extends Command
             $productCheckerResult = $this->productChecker->checkProduct($productUrl, $productMaxPrice);
         } catch (EmagProductCheckerException $exception) {
             $errorMessage = sprintf('ERROR checking product %s! %s', $productShortName, $exception->getMessage());
-            $output->writeln($errorMessage);
+            $this->writeLogLine($output, $errorMessage);
 
             $this->sendNotificationAndPrint($errorMessage, $productUrl, $output);
+
             return Command::FAILURE;
         }
 
@@ -90,22 +91,27 @@ class EmagProductCheckerCommand extends Command
             $successMessage = $this->getProductMessage(
                 self::MESSAGE_PRODUCT_AVAILABLE,
                 $productShortName,
-                $productCheckerResult
+                $productCheckerResult,
+                $productMaxPrice,
             );
-            $output->writeln($successMessage);
+            $this->writeLogLine($output, $successMessage);
 
             $this->sendNotificationAndPrint($successMessage, $productUrl, $output);
+
             return Command::SUCCESS;
         }
 
         // do not send notification when product is unavailable and no error occurred
-        $output->writeln(
+        $this->writeLogLine(
+            $output,
             $this->getProductMessage(
                 self::MESSAGE_PRODUCT_UNAVAILABLE,
                 $productShortName,
-                $productCheckerResult
-            )
+                $productCheckerResult,
+                $productMaxPrice,
+            ),
         );
+
         return Command::SUCCESS;
     }
 
@@ -113,23 +119,34 @@ class EmagProductCheckerCommand extends Command
     {
         $notificationResponse = $this->pushNotificationService->notify($message, $productUrl);
         if ($notificationResponse->isSuccessful()) {
-            $output->writeln('Push notification sent!');
+            $this->writeLogLine($output, 'Push notification sent!');
         } else {
-            $output->writeln(sprintf('ERROR sending push notification! %s', $notificationResponse->getError()));
+            $this->writeLogLine($output, sprintf('ERROR sending push notification! %s', $notificationResponse->getError()));
         }
     }
 
     private function getProductMessage(
         string $format,
         string $productShortName,
-        EmagProductCheckerResult $productCheckerResult
+        EmagProductCheckerResult $productCheckerResult,
+        int $productMaxPrice
     ): string {
         return sprintf(
             $format,
             $productShortName,
             $productCheckerResult->getProductData()->getPrice(),
+            $productMaxPrice,
             $productCheckerResult->getProductData()->getStockLevel(),
             $productCheckerResult->getProductData()->getSeller()
         );
+    }
+
+    private function writeLogLine(OutputInterface $output, string $message): void
+    {
+        $output->writeln(sprintf(
+            "[%s] %s",
+            date('Y-m-d H:i:s'),
+            $message,
+        ));
     }
 }
