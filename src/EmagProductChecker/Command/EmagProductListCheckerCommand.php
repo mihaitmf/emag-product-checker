@@ -59,7 +59,7 @@ class EmagProductListCheckerCommand extends Command
     protected function addWait(OutputInterface $output): void
     {
         $waitSeconds = random_int(0, 600); // wait a random time between requests to trick Emag and simulate a human behaviour
-        $output->writeln("\nWait for $waitSeconds seconds");
+        $output->writeln("Wait for $waitSeconds seconds");
         sleep($waitSeconds);
     }
 }
