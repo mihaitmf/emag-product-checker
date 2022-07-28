@@ -26,7 +26,7 @@ class EmagProductListCheckerCommand extends Command
 
     protected function configure(): void
     {
-        $commandName = 'check-list';
+        $commandName = 'check-emag-list';
         $this->setName($commandName)
             ->setDescription(
                 'Check a list of Emag products according to some constraints and send push notifications for those that are available'
