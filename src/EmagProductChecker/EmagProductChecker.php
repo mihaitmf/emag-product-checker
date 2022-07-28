@@ -104,7 +104,7 @@ class EmagProductChecker
     private function parseProductPage(string $productPageHtml): EmagProductData
     {
 //        file_put_contents('test.html', $productPageHtml); exit;
-//        $productPageHtml = file_get_contents('prod.html');
+//        $productPageHtml = file_get_contents('test.html');
 
         $domDocument = new DomDocument();
         @$domDocument->loadHTML($productPageHtml); // use @ to suppress warnings
@@ -113,7 +113,7 @@ class EmagProductChecker
         return new EmagProductData(
             $this->parseStockLevel($xPathFinder),
             $this->parseProductPrice($xPathFinder),
-            $this->parseSeller($xPathFinder)
+            $this->parseSeller($xPathFinder),
         );
     }
 
