@@ -44,6 +44,8 @@ class SummerWellProductCheckerCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->addWait($output);
+
         $productUrl = self::PRODUCT_URL;
         try {
             $productCheckerResult = $this->productChecker->checkProduct($productUrl);
@@ -78,6 +80,13 @@ class SummerWellProductCheckerCommand extends Command
         );
 
         return Command::SUCCESS;
+    }
+
+    protected function addWait(OutputInterface $output): void
+    {
+        $waitSeconds = random_int(0, 300); // wait a random time between requests to trick the website and simulate a human behaviour
+        $output->writeln("Wait for $waitSeconds seconds");
+        sleep($waitSeconds);
     }
 
     private function sendNotificationAndPrint(string $message, string $productUrl, OutputInterface $output): void
